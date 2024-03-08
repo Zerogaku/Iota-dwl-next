@@ -1,4 +1,4 @@
-#define TERMINAL "foot"
+#define TERMINAL "footclient"
 #define BROWSER "firefox"
 #define LAUNCHER "fuzzel"
 #include <X11/XF86keysym.h>
@@ -27,15 +27,15 @@ static int log_level = WLR_ERROR;
 
 /* Autostart */
 static const char *const autostart[] = {
-        "foot", "--server", NULL,
-        /* "mpd", NULL, */
-        "pipewire", NULL,
-        "dbus-daemon", "--session", "--address=unix:path=$XDG_RUNTIME_DIR/bus", NULL, 
-	      "bluetoothctl", "power", "off", NULL,
-        /* "swww_randomize", NULL, */ 
-        "delayed_autostart", NULL,
-        "emacsinit", NULL,
-        NULL /* terminate */
+	"foot", "--server", NULL,
+	/* "mpd", NULL, */
+	"pipewire", NULL,
+	"dbus-daemon", "--session", "--address=unix:path=$XDG_RUNTIME_DIR/bus", NULL,
+	/* "bluetoothctl", "power", "off", NULL, */
+	"swww_randomize", NULL,
+	"delayed_autostart", NULL,
+	"emacsinit", NULL,
+	NULL /* terminate */
 };
 
 
@@ -194,7 +194,7 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_W,          spawn,		     {.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,                    XKB_KEY_BackSpace,  spawn,          {.v = (const char*[]){ "sysact", NULL } } },
 	{ WLR_MODIFIER_SHIFT,        XKB_KEY_Print,      spawn,          {.v = (const char*[]){ "maimpick", NULL } } },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_X,          spawn,		     {.v = (const char*[]){ "emacs", NULL } } },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_X,          spawn,		     {.v = (const char*[]){ "emacsclient", "-c", NULL } } },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
