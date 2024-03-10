@@ -174,11 +174,12 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_d,          spawn,          {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = (const char*[]){ BROWSER, NULL } } },
-	{ MODKEY,			         XKB_KEY_r,		     spawn,		     {.v = (const char*[]){ TERMINAL, "-e", "lf", NULL } } },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_W,          spawn,		     {.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
+	{ MODKEY,			               XKB_KEY_r,		       spawn,		       {.v = (const char*[]){ TERMINAL, "-e", "lf", NULL } } },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_W,          spawn,		       {.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,                    XKB_KEY_BackSpace,  spawn,          {.v = (const char*[]){ "sysact", NULL } } },
 	{ WLR_MODIFIER_SHIFT,        XKB_KEY_Print,      spawn,          {.v = (const char*[]){ "maimpick", NULL } } },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_X,          spawn,		     {.v = (const char*[]){ "emacs", NULL } } },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_X,          spawn,		       {.v = (const char*[]){ "emacs", NULL } } },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_B,          spawn,		       {.v = (const char*[]){ TERMINAL, "-e", "bluetuith", NULL } } },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
