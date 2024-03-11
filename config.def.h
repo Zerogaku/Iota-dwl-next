@@ -58,6 +58,7 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },
 	{ "[M]",      monocle },
+	{ "||",       col },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
 
@@ -162,6 +163,7 @@ static const Key keys[] = {
 
 	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_U,          setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                    XKB_KEY_c,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
@@ -219,6 +221,7 @@ static const Key keys[] = {
 	{ WLR_MODIFIER_SHIFT,        XKB_KEY_Print,      spawn,          {.v = (const char*[]){ "maimpick", NULL } } },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_X,          spawn,		     {.v = (const char*[]){ "emacsclient", "-c", NULL } } },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_B,          spawn,		       {.v = (const char*[]){ TERMINAL, "-e", "bluetuith", NULL } } },
+	{ MODKEY,                    XKB_KEY_m,          spawn,		       {.v = (const char*[]){ TERMINAL, "-e", "ncmpcpp", NULL } } },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
