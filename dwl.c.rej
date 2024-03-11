@@ -1,0 +1,43 @@
+--- dwl.c
++++ dwl.c
+@@ -248,6 +250,7 @@ static void createmon(struct wl_listener *listener, void *data);
+ static void createnotify(struct wl_listener *listener, void *data);
+ static void createpointer(struct wlr_pointer *pointer);
+ static void cursorframe(struct wl_listener *listener, void *data);
++static void defaultgaps(const Arg *arg);
+ static void destroydragicon(struct wl_listener *listener, void *data);
+ static void destroyidleinhibitor(struct wl_listener *listener, void *data);
+ static void destroylayersurfacenotify(struct wl_listener *listener, void *data);
+@@ -289,11 +293,13 @@ static void printstatus(void);
+ static void quit(const Arg *arg);
+ static void rendermon(struct wl_listener *listener, void *data);
+ static void requeststartdrag(struct wl_listener *listener, void *data);
+-static void resize(Client *c, struct wlr_box geo, int interact);
++static void resizeapply(Client *c, struct wlr_box geo, int interact);
++static void resizenoapply(Client *c, struct wlr_box geo, int interact);
+ static void run(char *startup_cmd);
+ static void setcursor(struct wl_listener *listener, void *data);
+ static void setfloating(Client *c, int floating);
+ static void setfullscreen(Client *c, int fullscreen);
++static void setgaps(int px);
+ static void setlayout(const Arg *arg);
+ static void setmfact(const Arg *arg);
+ static void setmon(Client *c, Monitor *m, uint32_t newtags);
+@@ -371,6 +378,9 @@ static struct wlr_box sgeom;
+ static struct wl_list mons;
+ static Monitor *selmon;
+ 
++static int enablegaps = 1;   /* enables gaps, used by togglegaps */
++static void (*resize)(Client *c, struct wlr_box geo, int interact) = resizeapply;
++
+ /* global event handlers */
+ static struct wl_listener cursor_axis = {.notify = axisnotify};
+ static struct wl_listener cursor_button = {.notify = buttonpress};
+@@ -942,6 +983,7 @@ createmon(struct wl_listener *listener, void *data)
+ 	/* Initialize monitor state using configured rules */
+ 	for (i = 0; i < LENGTH(m->layers); i++)
+ 		wl_list_init(&m->layers[i]);
++	m->gappx = gappx;
+ 	m->tagset[0] = m->tagset[1] = 1;
+ 	for (r = monrules; r < END(monrules); r++) {
+ 		if (!r->name || strstr(wlr_output->name, r->name)) {
